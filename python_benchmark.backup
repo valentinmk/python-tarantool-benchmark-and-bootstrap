@@ -1,0 +1,390 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+-- Started on 2017-04-10 10:50:27
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE python_benchmark;
+--
+-- TOC entry 2272 (class 1262 OID 32842)
+-- Name: python_benchmark; Type: DATABASE; Schema: -; Owner: -
+--
+
+CREATE DATABASE python_benchmark WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
+
+
+\connect python_benchmark
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12429)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS tsm_system_rows WITH SCHEMA pg_catalog;
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2274 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 2 (class 3079 OID 34138)
+-- Name: pg_buffercache; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_buffercache WITH SCHEMA public;
+
+
+--
+-- TOC entry 2275 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION pg_buffercache; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_buffercache IS 'examine the shared buffer cache';
+
+
+--
+-- TOC entry 3 (class 3079 OID 34131)
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- TOC entry 2276 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
+--
+-- TOC entry 5 (class 3079 OID 33972)
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- TOC entry 2277 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
+--
+-- TOC entry 4 (class 3079 OID 34010)
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- TOC entry 2278 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 189 (class 1259 OID 32843)
+-- Name: id_for_stickers; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE id_for_stickers
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 191 (class 1259 OID 32858)
+-- Name: packs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE packs (
+    id integer NOT NULL,
+    data jsonb
+);
+
+
+--
+-- TOC entry 190 (class 1259 OID 32856)
+-- Name: packs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE packs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2279 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: packs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE packs_id_seq OWNED BY packs.id;
+
+
+--
+-- TOC entry 197 (class 1259 OID 33017)
+-- Name: secret; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE secret (
+    id integer NOT NULL,
+    data jsonb
+);
+
+
+--
+-- TOC entry 196 (class 1259 OID 33015)
+-- Name: secret_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE secret_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2280 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: secret_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE secret_id_seq OWNED BY secret.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 32995)
+-- Name: server; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE server (
+    id integer NOT NULL,
+    data jsonb
+);
+
+
+--
+-- TOC entry 192 (class 1259 OID 32993)
+-- Name: server_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE server_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2281 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: server_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE server_id_seq OWNED BY server.id;
+
+
+--
+-- TOC entry 195 (class 1259 OID 33006)
+-- Name: sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sessions (
+    id integer NOT NULL,
+    data jsonb
+);
+
+
+--
+-- TOC entry 194 (class 1259 OID 33004)
+-- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sessions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2282 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 33058)
+-- Name: stickers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE stickers (
+    id integer DEFAULT nextval('packs_id_seq'::regclass) NOT NULL,
+    data jsonb
+);
+
+
+--
+-- TOC entry 2131 (class 2604 OID 32861)
+-- Name: packs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY packs ALTER COLUMN id SET DEFAULT nextval('packs_id_seq'::regclass);
+
+
+--
+-- TOC entry 2134 (class 2604 OID 33020)
+-- Name: secret id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY secret ALTER COLUMN id SET DEFAULT nextval('secret_id_seq'::regclass);
+
+
+--
+-- TOC entry 2132 (class 2604 OID 32998)
+-- Name: server id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY server ALTER COLUMN id SET DEFAULT nextval('server_id_seq'::regclass);
+
+
+--
+-- TOC entry 2133 (class 2604 OID 33009)
+-- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
+
+
+--
+-- TOC entry 2144 (class 2606 OID 33025)
+-- Name: secret id_pk_secret; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY secret
+    ADD CONSTRAINT id_pk_secret PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2139 (class 2606 OID 33003)
+-- Name: server id_pk_server; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY server
+    ADD CONSTRAINT id_pk_server PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2141 (class 2606 OID 33014)
+-- Name: sessions id_pk_sessions; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sessions
+    ADD CONSTRAINT id_pk_sessions PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2137 (class 2606 OID 32866)
+-- Name: packs pk_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY packs
+    ADD CONSTRAINT pk_id PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2146 (class 2606 OID 33066)
+-- Name: stickers pk_id_stickers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stickers
+    ADD CONSTRAINT pk_id_stickers PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2142 (class 1259 OID 34033)
+-- Name: session_uuid_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX session_uuid_idx ON sessions USING btree ((((data ->> 0))::uuid));
+
+
+--
+-- TOC entry 2147 (class 1259 OID 34130)
+-- Name: stickers_data_1_indx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX stickers_data_1_indx ON stickers USING gin (((data -> 1)));
+
+CREATE INDEX stickers_data_1_indx_rating_1 ON stickers USING BTREE(((data ->> 1)::int));
+
+
+--
+-- TOC entry 2148 (class 1259 OID 34126)
+-- Name: stickers_data_idx1; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX stickers_data_idx1 ON stickers USING gin (data jsonb_path_ops);
+
+--
+-- PostgreSQL database dump complete
+--

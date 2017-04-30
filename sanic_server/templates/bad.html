@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script src="static/jquery-3.1.1.slim.min.js"></script>
+    <script src="static/tether.min.js"></script>
+    <script src="static/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/style-tr.css">
+  </head>
+  <body style="background-color:#ECEFF1;">
+    <div class="tl_page_head navbar navbar-static-top navbar-tr">
+      <div class="navbar-inner">
+        <div class="container clearfix middle-menu">
+          <ul class="nav navbar-tr">
+            <li><a class="home" href="/"></a></li>
+            <li><a {{ active_good }} href="good">GOOD</a></li>
+            <li><a {{ active_bad }} href="bad">BAD</a></li>
+            <li><a {{ active_ugly }} href="ugly" >UGLY</a></li>
+            <li><a {{ active_about }} href="about" class="about"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container clearfix">
+      <div class="press">
+        <h1>Top of the best stikers for Telegram</h1>
+      </div>
+      <!-- НАЧАЛО РЕЙТИНГА -->
+      <div class="rating container">
+        <div class="rating-zone">
+        <!-- ПЕРВАЯ СТРОЧКА ТАБЛИЦЫ -->
+          <div class="row1">
+            <div class="col1" title="+6 / 0">
+              <div class="sticker-top" >
+                <img class="top" src="{{ top [0][2]}}">
+                <p class="place"><strong>1 place</strong></p>
+                <p class="votes">Rating <b>{{ top [0][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [0][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col2" title="+6 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [1][2]}}">
+                <p class="place"><strong>2 place</strong></p>
+                <p class="votes">Rating <b>{{ top [1][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [1][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col3" title="+5 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [2][2]}}">
+                <p class="place"><strong>3 place</strong></p>
+                <p class="votes">Rating <b>{{ top [2][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [2][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Вторая строчка таблицы -->
+          <div class="row1">
+            <div class="col1" title="+5 / 0">
+              <div class="sticker-top" >
+                <img class="top" src="{{ top [3][2]}}">
+                <p class="place"><strong>4 place</strong></p>
+                <p class="votes">Rating <b>{{ top [3][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [3][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col2" title="+5 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [4][2]}}">
+                <p class="place"><strong>5 place</strong></p>
+                <p class="votes">Rating <b>{{ top [4][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [4][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+              </div>
+              </div>
+            </div>
+            <div class="col3" title="+5 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [5][2]}}">
+                <p class="place"><strong>6 place</strong></p>
+                <p class="votes">Rating <b>{{ top [5][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [5][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- ТРЕТЬЯ СТРОЧКА ТАБЛИЦЫ -->
+          <div class="row1">
+            <div class="col1" title="+5 / 0">
+              <div class="sticker-top" >
+                <img class="top" src="{{ top [6][2]}}">
+                <p class="place"><strong>7 place</strong></p>
+                <p class="votes">Rating <b>{{ top [6][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [6][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col2" title="+5 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [7][2]}}">
+                <p class="place"><strong>8 place</strong></p>
+                <p class="votes">Rating <b>{{ top [7][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [7][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col3" title="+5 / 0">
+              <div class="sticker-top">
+                <img class="top" src="{{ top [8][2]}}">
+                <p class="place"><strong>9 place</strong></p>
+                <p class="votes">Rating <b>{{ top [8][1] }}</b></p>
+                <div class="dowload">
+                  <a class="dowload" href="{{ top [8][3] }}" target="_blank" rel="nofollow" title="Download stickerpack"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- КОНЕЦ ТАБЛИЦЫ РЕЙТИНГА -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

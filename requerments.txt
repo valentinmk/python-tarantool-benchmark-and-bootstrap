@@ -1,0 +1,16 @@
+aiohttp
+jinja2
+aiohttp_jinja2
+aiohttp_session
+tarantool
+aiotarantool
+win_unicode_console
+ujson
+scrapy
+selenium
+asyncpg
+sanic
+sanic_session
+sanic-jinja2
+sanic_compress
+japronto

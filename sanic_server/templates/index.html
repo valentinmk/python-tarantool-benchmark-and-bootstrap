@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+    <!-- Latest compiled and minified CSS -->
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    -->
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script src="static/jquery-3.1.1.slim.min.js"></script>
+    <script src="static/tether.min.js"></script>
+    <script src="static/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/style-tr.css">
+  </head>
+  <body style="background-color:#ECEFF1;">
+    <div class="tl_page_head navbar navbar-static-top navbar-tr">
+      <div class="navbar-inner">
+        <div class="container clearfix middle-menu">
+          <ul class="nav navbar-tr">
+            <li><a class="home active" href="/"></a></li>
+            <li><a href="good">GOOD</a></li>
+            <li><a href="bad">BAD</a></li>
+            <li><a href="ugly" >UGLY</a></li>
+            <li><a href="about" class="about"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container clearfix">
+    <!-- BEGINNING OF VOTING -->
+      <div class="voting container">
+        <div class="voting-zone">
+          <!-- FIRST IMAGE CONTAINER -->
+          <div class="sticker" onclick="myFunction()">
+            <form name="voteFormLeft" id="idForm" method ="POST" action="/" >
+              <input class= "pic1" id="left_url" type="image" src="{{ random_image.left.url }}" alt="Vote left" >
+              <input type="hidden" name="vote_plus" value="{{ random_image.left.token_plus }}">
+              <input type="hidden" name="vote_minus" value="{{ random_image.right.token_minus }}">
+            </form>
+          </div>
+          <!-- SECOND IMAGE CONTAINER -->
+          <div class="sticker" onclick="myFunction()">
+              <form name="voteFormRight" id="idForm" method ="POST" action="/">
+                <input class= "pic2" id="right_url" type="image" src="{{ random_image.right.url }}" alt="Vote right" >
+                <input type="hidden" name="vote_plus" value="{{ random_image.right.token_plus }}" >
+                <input type="hidden" name="vote_minus" value="{{ random_image.left.token_minus }}" >
+              </form>
+          </div>
+        </div>
+      </div>
+      <!-- END OF VOTING -->
+      <div class="press">
+        <h1>Click on the best</h1>
+      </div>
+    </div>
+    <div id="snackbar" class="">Your vote has been counted</div>
+    <script>
+    function myFunction() {
+        var x = document.getElementById("snackbar")
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+    </script>
+    <script src="static/jquery-latest.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+  </body>
+</html>
