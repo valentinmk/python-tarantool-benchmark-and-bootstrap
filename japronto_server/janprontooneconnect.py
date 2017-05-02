@@ -227,6 +227,10 @@ async def stickers_api(request):
                         "rating": sticker[1],
                         "link": sticker[2],
                         "api":
+                            # Not working on 80 port until
+                            # https://github.com/squeaky-pl/japronto/issues/69
+                            # have been fixed.
+                            # You have to using your custom port.
                             "http://" +
                             request.hostname + ":" + str(request.port) +
                             request.path +
@@ -247,6 +251,10 @@ async def stickers_api(request):
                         "rating": pack[1],
                         "link": pack[2],
                         "api":
+                            # Not working on 80 port until
+                            # https://github.com/squeaky-pl/japronto/issues/69
+                            # have been fixed.
+                            # You have to using your custom port.
                             "http://" +
                             request.hostname + ":" + str(request.port) +
                             request.path +
