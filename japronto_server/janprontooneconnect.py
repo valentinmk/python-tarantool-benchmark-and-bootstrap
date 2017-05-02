@@ -188,31 +188,6 @@ async def handle(request):
 # API to stickers data
 
 async def stickers_api(request):
-    text = """Basic request properties:
-      Method: {0.method}
-      Path: {0.path}
-      HTTP version: {0.version}
-      Query string: {0.query_string}
-      Query: {0.query}""".format(request)
-    print(text)
-    text = """Body related properties:
-      Mime type: {0.mime_type}
-      Encoding: {0.encoding}
-      Body: {0.body}
-      Text: {0.text}
-      Form parameters: {0.form}
-      Files: {0.files}
-    """.format(request)
-    print(text)
-    text = """Miscellaneous:
-      Matched route: {0.route}
-      Hostname: {0.hostname}
-      Port: {0.port}
-      Remote address: {0.remote_addr},
-      HTTP Keep alive: {0.keep_alive}
-      Match parameters: {0.match_dict}
-    """.strip().format(request)
-    print(text)
     """TBD."""
     global db
     resp = {"packs": None,

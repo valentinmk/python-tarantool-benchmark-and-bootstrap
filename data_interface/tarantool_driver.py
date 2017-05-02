@@ -17,7 +17,6 @@ class TarantoolDriver:
         """We keep connection opened. Only one connection will used for """
         """all queries."""
         self.taran = aiotarantool.connect(
-            # 'db.teslarnd.ru',
             "127.0.0.1",
             3311,
             user='tesla',
@@ -31,7 +30,7 @@ class TarantoolDriver:
 
     async def create_random_vote(self):
         """Hide link in secret space and return md5 for it."""
-        random_number = random.randrange(0, 1000)
+        random_number = random.randrange(0, 100000)
         random_sticker = await self.taran.call(
             "box.space.stickers.index.p_name:random",
             (random_number)

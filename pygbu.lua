@@ -26,7 +26,7 @@ box.cfg {
     -- Has no default value, so must be specified if
     -- connections will occur from remote clients
     -- that do not use “admin address”
-    listen = 'localhost:3311';
+    listen = '127.0.0.1:3311';
     -- listen = '*:3301';
 
     -- The server is considered to be a Tarantool replica
@@ -34,7 +34,7 @@ box.cfg {
     -- which replication_source specifies with a URI
     -- for example konstantin:secret_password@tarantool.org:3301
     -- by default username is "guest"
-    -- replication_source="127.0.0.1:3102";
+    -- replication="127.0.0.1:3311";
 
     -- The server will sleep for io_collect_interval seconds
     -- between iterations of the event loop
