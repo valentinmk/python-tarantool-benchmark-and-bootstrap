@@ -91,6 +91,8 @@ tarantoolctl connect 'tesla:secret@*:3311'
 #    engine: memtx
 # ...
 #
+# Run externalapitotarantool.py to fill your tarantool db
+python test/externalapitotarantool.py
 # Postgres
 #
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
