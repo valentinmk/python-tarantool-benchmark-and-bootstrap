@@ -39,8 +39,8 @@ pyenv rehash
 # Load our benchmark
 #
 git clone https://github.com/valentinmk/python-tarantool-benchmark-and-bootstrap.git
-cd taran-python-benchmark/
-pyenv local 3.5.3
+cd python-tarantool-benchmark-and-bootstrap/
+pyenv local 3.6.1
 pip install -r requerments.txt
 #
 # Tarantool part
