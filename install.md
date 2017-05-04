@@ -33,13 +33,13 @@ source ~/.bashrc
 # echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
 # source ~/.bash_profile
 pyenv update
-pyenv install 3.5.3
+pyenv install 3.6.1
 pyenv rehash
 #
 # Load our benchmark
 #
 git clone https://github.com/valentinmk/python-tarantool-benchmark-and-bootstrap.git
-cd python-tarantool-benchmark-and-bootstrap/
+cd taran-python-benchmark/
 pyenv local 3.6.1
 pip install -r requerments.txt
 #
@@ -91,8 +91,6 @@ tarantoolctl connect 'tesla:secret@*:3311'
 #    engine: memtx
 # ...
 #
-# Run externalapitotarantool.py to fill your tarantool db
-python tests/externalapitotarantool.py
 # Postgres
 #
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
