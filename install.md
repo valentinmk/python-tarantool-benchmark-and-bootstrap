@@ -2,22 +2,20 @@
 sudo apt update
 sudo apt upgrade -y
 #
-# Get machine info
+# Get server info
 #
 sudo cat /proc/cpuinfo
-sudo apt install mbw
-  sudo mbw 128 | grep AVG
 sudo hdparm -t /dev/sda1  # Disk may be vary
 #
-# Some usefull staff
+# Some usefull staff (optional)
 #
 sudo apt install htop mc wrk -y
 #
-# libs to install python pip
+# dependencies for python libs
 #
 sudo apt install git make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev -y
 #
-# nginx
+# nginx (opional)
 #
 sudo apt install nginx -y
 #
@@ -28,10 +26,6 @@ echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 source ~/.bashrc
-# echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bash_profile
-# echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-# echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
-# source ~/.bash_profile
 pyenv update
 pyenv install 3.6.1
 pyenv rehash
@@ -39,7 +33,7 @@ pyenv rehash
 # Load our benchmark
 #
 git clone https://github.com/valentinmk/python-tarantool-benchmark-and-bootstrap.git
-cd taran-python-benchmark/
+cd python-tarantool-benchmark-and-bootstrap/
 pyenv local 3.6.1
 pip install -r requerments.txt
 #
@@ -64,8 +58,9 @@ sudo apt-get -y install tarantool
 sudo tarantoolctl stop example
 sudo rm /etc/tarantool/instances.enabled/example.lua
 #
-# Load our instance
+# Prepare and start our instance
 #
+# cp from python-tarantool-benchmark-and-bootstrap directory
 sudo cp pygbu.lua /etc/tarantool/instances.available/pygbu.lua
 sudo ln -s /etc/tarantool/instances.available/pygbu.lua /etc/tarantool/instances.enabled/pygbu.lua
 sudo tarantoolctl start pygbu
@@ -91,6 +86,10 @@ tarantoolctl connect 'tesla:secret@*:3311'
 #    engine: memtx
 # ...
 #
+# Load Stickers data from Sticker api hosted on http://db.teslarnd.ru/stickers
+#
+python test/externalapitotarantool.py
+#
 # Postgres
 #
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
@@ -108,10 +107,9 @@ postgres=# \q
 #test
 psql -U tesla -d postgres -h 127.0.0.1 -W
 sudo -u postgres createdb python_benchmark
+# python_benchmark.backup contained in python-tarantool-benchmark-and-bootstrap directory
 psql -U tesla -h 127.0.0.1 -d postgres -f python_benchmark.backup
 # DB done
 # load data from Tarantool to Postgres
 python tests/pgtotarantool.py
 ```
-
-TODO simple service to load all stickers and packs
