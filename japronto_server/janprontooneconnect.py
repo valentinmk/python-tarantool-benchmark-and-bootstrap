@@ -41,11 +41,17 @@ def init(loop_param=None, port_param=None, db_driver=None):
 
 
 async def listner_for_statistics():
+    """TBD."""
     global statistics
     global db
-    statistics = await db.get_statistics()
-    await asyncio.sleep(5)
-    await listner_for_statistics()
+    while True:
+        try:
+            statistics = await db.get_statistics()
+        except:  # “too broad exception”
+            logging.error("Error while db.get_statictics()")
+            logging.error(traceback.format_exc())
+            await asyncio.sleep(5)
+    return
 
 
 async def async_good(request):

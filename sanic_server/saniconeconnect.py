@@ -2,6 +2,7 @@
 import asyncio
 import logging
 import os
+import traceback
 import sys
 from .helper import SanicHelper
 from sanic.response import html, json
@@ -29,9 +30,16 @@ class SanicTarantoolOne (SanicHelper):
             "users": "empty"}
 
     async def listner_for_statistics(self):
-        self.statistics = await self.db.get_statistics()
-        await asyncio.sleep(5)
-        await self.listner_for_statistics()
+        while True:
+            try:
+                self.statistics = await self.db.get_statistics()
+            except:  # “too broad exception”
+                logging.error("Error while db.get_statictics()")
+                logging.error(traceback.format_exc())
+            await asyncio.sleep(5)
+        return
+        # Cause RecursionError: maximum recursion depth exceeded
+        # return await self.listner_for_statistics()
 
     async def async_good(self, request):
         """TBD."""

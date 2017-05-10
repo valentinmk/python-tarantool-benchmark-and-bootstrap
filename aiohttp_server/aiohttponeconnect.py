@@ -3,6 +3,7 @@ import aiohttp_jinja2
 import asyncio
 import logging
 import os
+import traceback
 from aiohttp import web
 from aiohttp_session import get_session
 from .helper import AiohttpHelper
@@ -29,9 +30,16 @@ class AiohttpUniversalOne (AiohttpHelper):
             "users": "empty"}
 
     async def listner_for_statistics(self):
-        self.statistics = await self.db.get_statistics()
-        await asyncio.sleep(5)
-        await self.listner_for_statistics()
+        while True:
+            try:
+                self.statistics = await self.db.get_statistics()
+            except:  # “too broad exception”
+                logging.error("Error while db.get_statictics()")
+                logging.error(traceback.format_exc())
+            await asyncio.sleep(5)
+        return
+        # Cause RecursionError: maximum recursion depth exceeded
+        # return await self.listner_for_statistics()
 
     @aiohttp_jinja2.template('good.html')
     async def async_good(self, request):
