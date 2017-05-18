@@ -50,7 +50,7 @@ async def listner_for_statistics():
         except:  # “too broad exception”
             logging.error("Error while db.get_statictics()")
             logging.error(traceback.format_exc())
-            await asyncio.sleep(5)
+        await asyncio.sleep(5)
     return
 
 
