@@ -6,6 +6,7 @@ import os
 import traceback
 from aiohttp import web
 from aiohttp_session import get_session
+from jinja2 import PackageLoader, Environment
 from .helper import AiohttpHelper
 
 
@@ -28,6 +29,10 @@ class AiohttpUniversalOne (AiohttpHelper):
             "clicks": "empty",
             "votes": "empty",
             "users": "empty"}
+        self.jinja = Environment(
+            loader=PackageLoader('aiohttp_server', 'templates'),
+            # enable_async=False,
+            auto_reload=False)
 
     async def listner_for_statistics(self):
         while True:
@@ -52,9 +57,16 @@ class AiohttpUniversalOne (AiohttpHelper):
         }
         await self.session_handler(request=request)
         data["top"] = await self.db.get_top(9, 'ITERATOR_LE')
-        return data
+        return web.Response(
+            text=self.jinja.get_template('good.html').render(
+                title=data["title"],
+                active_good=data["active_good"],
+                active_bad=data["active_bad"],
+                top=data["top"]
+                ),
+            content_type='text/html')
 
-    @aiohttp_jinja2.template('bad.html')
+    # @aiohttp_jinja2.template('bad.html')
     async def action_bad(self, request):
         """TBD."""
         data = {
@@ -65,20 +77,36 @@ class AiohttpUniversalOne (AiohttpHelper):
         }
         await self.session_handler(request=request)
         data['top'] = await self.db.get_top(9, 'ITERATOR_GE')
-        return data
+        return web.Response(
+            text=self.jinja.get_template('good.html').render(
+                title=data["title"],
+                active_good=data["active_good"],
+                active_bad=data["active_bad"],
+                top=data["top"]
+            ),
+            content_type='text/html')
 
     async def action_ugly(self, request):
         """TBD."""
         return web.Response(text="UGLY")
 
-    @aiohttp_jinja2.template('about.html')
+    # @aiohttp_jinja2.template('about.html')
     async def action_about(self, request):
         """TBD."""
         data = {"title": "About and statistics"}
         data.update(self.statistics)
-        return data
+        return web.Response(
+            text=self.jinja.get_template('about.html').render(
+                title=data['title'],
+                packs_count=data['packs_count'],
+                stickers_count=data['stickers_count'],
+                clicks=data['clicks'],
+                votes=data['votes'],
+                users=data['users']
+            ),
+            content_type='text/html')
 
-    @aiohttp_jinja2.template('index.html')
+    # @aiohttp_jinja2.template('index.html')
     async def handle(self, request):
         """TBD."""
         data = {
@@ -122,7 +150,12 @@ class AiohttpUniversalOne (AiohttpHelper):
         data["random_image"]["left"]["token_minus"] = \
             data["random_image"]["left"]["token_plus"]
         await self.db.update_stats(0, self.UPDATE_PLUS, self.NO_UPDATE)
-        return data
+        return web.Response(
+            text=self.jinja.get_template('index.html').render(
+                title=data["title"],
+                random_image=data["random_image"],
+            ),
+            content_type='text/html')
 
     async def session_handler(self, request):
         """Handle sessions for request."""
